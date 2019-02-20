@@ -31,8 +31,6 @@ export class ContenedorContainerComponent implements OnInit {
   }
 
   filtra (searchText: any) {
- //   this.lanzamientos = [];
-   // this.resultado.contenido = 0;
    this.resetear();
     console.log('texto: ' + searchText);
     console.log('Filtro: ' + this.filtro.valor);
@@ -76,52 +74,32 @@ export class ContenedorContainerComponent implements OnInit {
               misi.agencies.forEach ( (agenlan) => {
                 if ( agenlan.name === agen.name ) {
                   this.resultado.contenido ++;
-                  this.lanzamientos.push('Lanzamiento: ' +  lanzamientosJS.launches[j].name);
-                }
-              });
-            }
-          });
-        });
-        }
-         });
-
-
-         for ( let i = 0; i < agenciasJS.agencies.length; i++ ) {
-      if ( agenciasJS.agencies[i].name.toLowerCase().includes(search) ) {
-
-        for ( let j = 0; j < lanzamientosJS.launches.length; j++ ) {
-          for ( let k = 0; k < lanzamientosJS.launches[j].missions.length; k++ ) {
-            if ( lanzamientosJS.launches[j].missions[k].agencies !== null ) {
-              for ( let l = 0; l < lanzamientosJS.launches[j].missions[k].agencies.length; l++ ) {
-                if ( lanzamientosJS.launches[j].missions[k].agencies[l].name === agenciasJS.agencies[i].name ) {
-                  this.resultado.contenido ++;
-                  this.lanzamientos.push('Lanzamiento: ' +  lanzamientosJS.launches[j].name);
-                }
+                  this.lanzamientos.push('Lanzamiento: ' +  lanza.name);
+                  }
+                });
               }
-            }
-          }
+            });
+          });
         }
-      }
+      });
     }
-
-  }
   }
 
   porTipos (search: any) {
-    for ( let i = 0; i < tiposJS.types.length; i++ ) {
-      if ( tiposJS.types[i].name.toLowerCase().includes(search) ) {
-        // pintar tipo
-        this.criterio.push( 'TIPO ' + tiposJS.types[i].name);
-        for ( let j = 0; j < lanzamientosJS.launches.length; j++ ) {
-          for ( let k = 0; k < lanzamientosJS.launches[j].missions.length; k++ ) {
-            if ( lanzamientosJS.launches[j].missions[k].type === tiposJS.types[i].id) {
-              this.resultado.contenido ++;
-              this.lanzamientos.push('Lanzamiento: ' +  lanzamientosJS.launches[j].name );
+    if ( search.length !== 0 ) {
+      tiposJS.types.forEach( (tipo) => {
+        if ( tipo.name.toLowerCase().includes(search) ) {
+          lanzamientosJS.launches.forEach( (lanza) => {
 
-            }
-          }
+            lanza.missions.forEach( (misi) => {
+              if ( tipo.id === misi.type ) {
+                this.resultado.contenido ++;
+                this.lanzamientos.push('Lanzamiento: ' +  lanza.name );
+              }
+            });
+          });
         }
-      }
+      });
     }
   }
 
