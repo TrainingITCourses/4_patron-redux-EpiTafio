@@ -1,29 +1,10 @@
 <section>
-  <ul id="selector">
-      <select #filtro
-    (change)="cambiaFiltro(filtro.value)"
-      name="filtro"
-      >
-        <option value="0" style="display: none">Elija un filtro de búsqueda</option>
-          <option  value="1"
-
-          >Estado</option>
-
-          <option value="2"
-
-          >Agencia</option>
-
-          <option value="3">Tipo</option>
-
-          </select>
-  </ul>
+    <label>Buscador: </label>
     <input #searchText
-
            matInput
            name="search"
            type="text"
            placeholder="Type here to search"
         (keyup)="hayTexto(searchText.value)"
-
            >
 </section>

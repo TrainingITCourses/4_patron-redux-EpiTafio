@@ -7,9 +7,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./resultado-presenter.component.css']
 })
 export class ResultadoPresenterComponent implements OnInit {
-  @Input() public resultado = { contenido: 99 };
-  @Input() public lanzamientos: any[];
-  @Input() public criterio = { valor: ''};
+  @Input() public filtros: any[];
   constructor() { }
 
   ngOnInit() {

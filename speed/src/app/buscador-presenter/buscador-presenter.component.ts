@@ -7,8 +7,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class BuscadorPresenterComponent implements OnInit {
   @Output() public search = new EventEmitter<string>();
-  @Output() public filtratipo = new EventEmitter<string>();
-  public filtro: any;
   constructor() { }
 
   ngOnInit() {
@@ -19,8 +17,4 @@ export class BuscadorPresenterComponent implements OnInit {
   this.search.next(texto.toLowerCase());
   }
 
-  public cambiaFiltro(valor: any) {
-    console.log('Cambia filtro ' + valor );
-    this.filtratipo.next(valor);
-  }
 }

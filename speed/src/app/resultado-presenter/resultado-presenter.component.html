@@ -1,8 +1,6 @@
-<h2>
-  LISTA LANZAMIENTOS
- </h2>
- <p> Resultados: {{ resultado.contenido}}  </p>
- <p> {{ criterio.valor }} </p>
- <ul *ngFor="let lanzamiento of lanzamientos">
-   {{lanzamiento }}
- </ul>
+<ul *ngFor="let filtro of filtros">
+    {{ filtro }}
+  </ul>
+
+
+

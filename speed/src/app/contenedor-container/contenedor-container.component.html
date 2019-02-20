@@ -1,6 +1,19 @@
-<app-buscador-presenter (search)="onSearch($event)"
-                        (filtratipo)="onFiltratipo($event)"></app-buscador-presenter>
-<app-resultado-presenter [resultado]="resultado"
-                          [lanzamientos]="lanzamientos"
-                          [criterio]="criterio"></app-resultado-presenter>
+<div>
+  <h3>Buscador de lanzamientos</h3>
+  <app-filtros-presenter (filtros)="onFiltratipo($event)"></app-filtros-presenter>
+  <p></p>
+  <app-resultado-presenter [filtros]="filtros"></app-resultado-presenter>
+  <p></p>
+  <app-buscador-presenter (search)="onSearch($event)"></app-buscador-presenter>
+</div>
+<div>
+  <h3>LISTA LANZAMIENTOS</h3>
+  <app-listado-presenter [lanzamientos]="lanzamientos" [resultado]="resultado"></app-listado-presenter>
+</div>
+
+
+
+
+
+
 
