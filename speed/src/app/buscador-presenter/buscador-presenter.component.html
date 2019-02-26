@@ -1,6 +1,17 @@
+<section id="selector">
+  <select #filtro
+  (change)="cambiaFiltro(filtro.value)"
+    name="filtro">
+    <option value="0" style="display: none">Elija un filtro de búsqueda</option>
+    <option value="1">Estado</option>
+    <option value="2">Agencia</option>
+    <option value="3">Tipo</option>
+  </select>
+</section>
+<p></p>
 <section>
-    <label>Buscador: </label>
-    <input #searchText
+  <label>Buscador: </label>
+  <input #searchText
            matInput
            name="search"
            type="text"

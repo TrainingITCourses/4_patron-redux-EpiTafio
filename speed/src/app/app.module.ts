@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContenedorContainerComponent } from './contenedor-container/contenedor-container.component';
 import { BuscadorPresenterComponent } from './buscador-presenter/buscador-presenter.component';
-import { ResultadoPresenterComponent } from './resultado-presenter/resultado-presenter.component';
-import { FiltrosPresenterComponent } from './filtros-presenter/filtros-presenter.component';
 import { ListadoPresenterComponent } from './listado-presenter/listado-presenter.component';
 
 @NgModule({
@@ -14,8 +12,6 @@ import { ListadoPresenterComponent } from './listado-presenter/listado-presenter
     AppComponent,
     ContenedorContainerComponent,
     BuscadorPresenterComponent,
-    ResultadoPresenterComponent,
-    FiltrosPresenterComponent,
     ListadoPresenterComponent
   ],
   imports: [

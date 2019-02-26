@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService, PorAgencias, PorEstados, PorTipos } from '../store.service';
 import lanzamientosJS from '../../assets/data/launches.json';
 import estadosJS from '../../assets/data/launchstatus.json';
 import agenciasJS from '../../assets/data/agencies.json';
@@ -10,15 +11,16 @@ import tiposJS from '../../assets/data/missiontypes.json';
   styleUrls: ['./contenedor-container.component.css']
 })
 export class ContenedorContainerComponent implements OnInit {
-  public lanzamientos: any[] = [];
-  public resultado  = { contenido: 0 };
-  public filtro = { valor: 0 };
-   public criterio:  any[];
-  public filtros: any[];
 
-  constructor() { }
+  public lanzamientos: any[];
+  public contador  = { contenido: 0 };
+  public filtro = { valor: 0 };
+
+  constructor(private store: StoreService) { }
 
   ngOnInit() {
+    this.lanzamientos = [];
+    this.store.select$().subscribe(valor => ( this.lanzamientos = valor));
   }
 
   onSearch = (searchText: any) =>  {
@@ -27,21 +29,23 @@ export class ContenedorContainerComponent implements OnInit {
 
   onFiltratipo = (opcion: any) => {
     this.filtro.valor = opcion;
-    this.resetear();
+    this.lanzamientos = [];
+    this.contador.contenido = 0;
   }
 
   filtra (searchText: any) {
-   this.resetear();
-    console.log('texto: ' + searchText);
-    console.log('Filtro: ' + this.filtro.valor);
+    this.lanzamientos = [];
+    this.contador.contenido = 0;
     const search = searchText.toLowerCase();
-
         if ( 1 == this.filtro.valor ) {
-          this.porEstados(search);
+      //    this.porEstados(search);
+          this.store.dispatch(new PorEstados(search));
         } else if ( this.filtro.valor == 2) {
-          this.porAgencias(search);
+         // this.porAgencias(search);
+          this.store.dispatch(new PorAgencias(search));
         } else if ( this.filtro.valor == 3 ) {
-          this.porTipos(search);
+    //      this.porTipos(search);
+          this.store.dispatch(new PorTipos(search));
         } else {
           console.log('"Invalid choice"');
           this.lanzamientos.push('¡¡¡ ELIJA CRITERIO !!! ');
@@ -49,63 +53,10 @@ export class ContenedorContainerComponent implements OnInit {
 
   }
 
-  porEstados (search: any) {
-    if ( search.length !== 0 ) {
-      lanzamientosJS.launches.forEach( (lanza)  => {
-        estadosJS.types.forEach( (esta) => {
-          if ( esta.name.toLowerCase().includes(search) || esta.description.toLowerCase().includes(search)  ) {
-            if (esta.id === lanza.status) {
-              this.resultado.contenido ++;
-              this.lanzamientos.push( 'Lanzamiento: ' +  lanza.name );
-            }
-          }
-        });
-       });
-    }
-  }
 
-  porAgencias (search: any) {
-    if ( search.length !== 0 ) {
-      agenciasJS.agencies.forEach( (agen) => {
-        if ( agen.name.toLowerCase().includes(search) ) {
-          lanzamientosJS.launches.forEach( (lanza) => {
-          lanza.missions.forEach( (misi) => {
-            if ( misi.agencies !== null ) {
-              misi.agencies.forEach ( (agenlan) => {
-                if ( agenlan.name === agen.name ) {
-                  this.resultado.contenido ++;
-                  this.lanzamientos.push('Lanzamiento: ' +  lanza.name);
-                  }
-                });
-              }
-            });
-          });
-        }
-      });
-    }
-  }
-
-  porTipos (search: any) {
-    if ( search.length !== 0 ) {
-      tiposJS.types.forEach( (tipo) => {
-        if ( tipo.name.toLowerCase().includes(search) ) {
-          lanzamientosJS.launches.forEach( (lanza) => {
-
-            lanza.missions.forEach( (misi) => {
-              if ( tipo.id === misi.type ) {
-                this.resultado.contenido ++;
-                this.lanzamientos.push('Lanzamiento: ' +  lanza.name );
-              }
-            });
-          });
-        }
-      });
-    }
-  }
-
+/*
   resetear() {
     this.lanzamientos = [];
-    this.resultado.contenido = 0;
-    this.criterio = [];
-  }
+    this.contador.contenido = 0;
+  }*/
 }

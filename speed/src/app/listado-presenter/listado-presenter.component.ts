@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit  } from '@angular/cor
 })
 export class ListadoPresenterComponent implements OnInit {
   @Input() public lanzamientos: any[];
-  @Input() public resultado = { contenido: 99 };
+  @Input() public contador = { contenido: 99 };
   constructor() { }
 
   ngOnInit() {
